@@ -4,7 +4,7 @@ Bike routes should represent a specific, interesting path that you would send a 
 
 * Routes should start and end in semi-public places like shopping centers or coffee shops, not your house.
 * Routes should adhere to a JSON schema like the one below. Some properties are required, some not.
-* 
+* Some routes can be very complex, so keep the geometry (LineString) on one line to keep `routes.geojson` somewhat readable.
 
 ## Example Route (route schema)
 
@@ -25,7 +25,7 @@ The root object in `routes.geojson` is a GeoJSON [FeatureCollection](http://geoj
         "properties": {
             "name": "Deer Creek Loop",  # required - The name of the route
             "description": "This ride includes a tough climb ...",  # required - A brief description of the route
-            "distance": 72420,  # required - The distance of the route in meters (yes meters. stop whining, you can google it)
+            "distance": 43.2,  # required - The distance of the route in miles (yes miles, since this is Denver focused)
             "difficulty": 8,  # optional - The difficulty of the route on a scale of 1 to 10, where 10 is the most difficult
         }
     }
