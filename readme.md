@@ -2,10 +2,7 @@
 
 <img src="https://travis-ci.org/JasonSanford/denver-bike-routes.png">
 
-
 ### A collaborative list of Denver bike routes
-
-*Because coding together is better than coding alone (TM)*
 
 ### [The Map](routes.geojson)
 
@@ -16,19 +13,15 @@ CC-BY-SA
 ## How to contribute
 
 1. Fork the project
-2. Add or edit a location by editing and following the format in `routes.geojson` (hint, it's geoJSON)
+2. Add or edit a route by editing and following the format in `routes.geojson` (hint, it's GeoJSON)
 3. Submit a pull request
 
-## Validating the geoJSON
+## Validating the GeoJSON
 
-When you submit a pull request, it will automatically check to ensure your geoJSON is valid.
+When you submit a pull request, it will automatically check to ensure your GeoJSON is valid.
 
 If you'd like to check yourself, you can run `./script/cibuild` locally, or pasting the contents of `routes.geojson` into http://geojsonlint.com.
 
-## How to find the lat/long of a location
+## Credit
 
-Pop it into http://geocoder.us/. Boom.
-
-## Why?
-
-Don't ask such questions.
+Inspired by (copied from) [benbalter/dc-wifi-social](https://github.com/benbalter/dc-wifi-social)

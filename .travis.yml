@@ -1,1 +1,7 @@
 script: ./script/cibuild
+notifications:
+    email:
+        recipients:
+            - jasonsanford@gmail.com
+        on_success: never
+        on_error: always
