@@ -12,6 +12,8 @@ CC-BY-SA
 
 ## How to contribute
 
+The basics are below, but see [contributing.md](contributing.md) for details.
+
 1. Fork the project
 2. Add or edit a route by editing and following the format in `routes.geojson` (hint, it's GeoJSON)
 3. Submit a pull request

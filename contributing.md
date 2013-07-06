@@ -12,13 +12,14 @@ The root object in `routes.geojson` is a GeoJSON [FeatureCollection](http://geoj
 
     {
         "type": "Feature",
-        "geometry": {
+        "geometry": {  # A GeoJSON [LineString](http://geojson.org/geojson-spec.html#linestring) representing the route
             "type": "LineString",
             "coordinates": [
                 [-105.02641, 39.582270000000001],
                 [-105.02647000000002, 39.582310000000007],
                 [-105.02656999999999, 39.582410000000003],
-                ....
+                ...
+                [-105.02638999999999, 39.582260000000005]
             ]
         },
         "properties": {
