@@ -1,6 +1,6 @@
 # Denver Bike Routes
 
-<img src="https://travis-ci.org/benbalter/denver-bike-routes.png">
+<img src="https://travis-ci.org/JasonSanford/denver-bike-routes.png">
 
 
 ### A collaborative list of Denver bike routes

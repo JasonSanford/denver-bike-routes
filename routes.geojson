@@ -1,126 +1,126 @@
 {
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -77.039882,
-          38.898321
-        ]
-      },
-      "properties": {
-        "marker-symbol": "bar",
-        "name": "The Exchange",
-        "address": "1719 G St NW"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -77.038193,
-          38.901345
-        ]
-      },
-      "properties": {
-        "marker-symbol": "bar",
-        "name": "Blackfin",
-        "address": "1620 I St NW"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -77.031950,
-          38.907826
-        ]
-      },
-      "properties": {
-        "marker-symbol": "bar",
-        "name": "Churchkey",
-        "address": "1337 14th St NW",
-        "note": "Ask the bartender for the password"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -77.018728,
-          38.902708
-        ]
-      },
-      "properties": {
-        "marker-symbol": "bar",
-        "name": "Busboys and Poets",
-        "address": "1025 5th St NW"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -77.047745,
-          38.909637
-        ]
-      },
-      "properties": {
-        "marker-symbol": "bar",
-        "name": "SoHo Cafe",
-        "address": "2150 P St NW"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -77.018627,
-          38.899924
-        ]
-      },
-      "properties": {
-        "marker-symbol": "bar",
-        "name": "Chinatown Coffee Company",
-        "address": "475 H St NW"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -77.043450,
-          38.905342
-        ]
-      },
-      "properties": {
-        "marker-symbol": "bar",
-        "name": "Science Club",
-        "address": "1136 19th St NW"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -77.027744,
-          38.929675
-        ]
-      },
-      "properties": {
-        "marker-symbol": "bar",
-        "name": "Wonderland Ballroom",
-        "address": "  1101 Kenyon St NW"
-      }
-    }
-  ]
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.039882,
+                    38.898321
+                ]
+            },
+            "properties": {
+                "marker-symbol": "bar",
+                "name": "The Exchange",
+                "address": "1719 G St NW"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.038193,
+                    38.901345
+                ]
+            },
+            "properties": {
+                "marker-symbol": "bar",
+                "name": "Blackfin",
+                "address": "1620 I St NW"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.031950,
+                    38.907826
+                ]
+            },
+            "properties": {
+                "marker-symbol": "bar",
+                "name": "Churchkey",
+                "address": "1337 14th St NW",
+                "note": "Ask the bartender for the password"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.018728,
+                    38.902708
+                ]
+            },
+            "properties": {
+                "marker-symbol": "bar",
+                "name": "Busboys and Poets",
+                "address": "1025 5th St NW"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.047745,
+                    38.909637
+                ]
+            },
+            "properties": {
+                "marker-symbol": "bar",
+                "name": "SoHo Cafe",
+                "address": "2150 P St NW"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.018627,
+                    38.899924
+                ]
+            },
+            "properties": {
+                "marker-symbol": "bar",
+                "name": "Chinatown Coffee Company",
+                "address": "475 H St NW"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.043450,
+                    38.905342
+                ]
+            },
+            "properties": {
+                "marker-symbol": "bar",
+                "name": "Science Club",
+                "address": "1136 19th St NW"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.027744,
+                    38.929675
+                ]
+            },
+            "properties": {
+                "marker-symbol": "bar",
+                "name": "Wonderland Ballroom",
+                "address": "    1101 Kenyon St NW"
+            }
+        }
+    ]
 }
