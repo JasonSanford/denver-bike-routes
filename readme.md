@@ -26,4 +26,4 @@ If you'd like to check yourself, you can run `./script/cibuild` locally, or past
 
 ## Credit
 
-Inspired by (copied from) [benbalter/dc-wifi-social](https://github.com/benbalter/dc-wifi-social)
+Inspired by (forked from) [benbalter/dc-wifi-social](https://github.com/benbalter/dc-wifi-social)
