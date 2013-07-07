@@ -29,6 +29,16 @@ The root object in `routes.geojson` is a GeoJSON [FeatureCollection](http://geoj
         }
     }
 
+## Route Creation
+
+Hand-coding GeoJSON Points is easy enough, but LineStrings are a different story. Use one of the tools below to help.
+
+* Use [MapMyRide](http://www.mapmyride.com) to create a route and use the GeoJSON endpoint to export it. The advantage here is you can use Google Maps directions to easily create your route.
+    * Create the route at http://www.mapmyride.com/routes/create (you'll need to log in)
+    * After creating your route, note the route id in the URL: `http://www.mapmyride.com/routes/view/<route_id>`
+    * Hit the GeoJSON endpoint with this route id: `http://www.mapmyride.com/routes/<route_id>.geojson`
+* Use the supplied route creation tool to freehand-draw your route: http://denver-bike-routes.geojason.info/#create
+
 ## Route Simplification
 
 Some routes can be unnecessarily complex. We can use [Shapely](http://toblerity.github.io/shapely/manual.html) to simplify these so the repo's size doesn't get out of hand.

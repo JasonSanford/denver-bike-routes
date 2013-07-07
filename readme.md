@@ -4,7 +4,10 @@
 
 ### A collaborative list of Denver bike routes
 
-### [The Map](routes.geojson)
+### The Map
+
+* View at GitHub [routes.geojson](routes.geojson)
+* Advanced view with filters for distance and difficulty http://denver-bike-routes.geojason.info/
 
 ## License
 
