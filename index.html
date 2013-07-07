@@ -2,10 +2,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Create GeoJSON</title>
+    <title>Denver Bike Routes Explorer</title>
 
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.2/leaflet.css" />
-    <link rel="stylesheet" href="lib/leaflet-draw/leaflet.draw.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.2/leaflet.css">
+    <link rel="stylesheet" href="lib/leaflet-draw/leaflet.draw.css">
+    <link href="lib/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="lib/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
     
     <!--[if lte IE 8]>
         <link rel="stylesheet" href="lib/leaflet/leaflet.ie.css" />
@@ -15,34 +19,46 @@
     <script src="http://cdn.leafletjs.com/leaflet-0.6.2/leaflet.js"></script>
     <script src="lib/leaflet-draw/leaflet.draw.js"></script>
     <style type="text/css">
-        html, body {
-            margin: 0;
-            padding: 0;
+        .standard-height {
+            height: 500px;
+        }
+        .full-height {
             height: 100%;
         }
-        #wrapper {
-            height: 100%;
-            position: relative;
-        }
-        #map {
-            height: 100%;
-            width: 80%;
-            float: left;
-        }
-        #output {
-            width: 20%;
-            float: left;
-            height: 100%;
+        .full-width {
+            width: 100%;
         }
     </style>
 </head>
 <body>
 
-    <div id="wrapper">
-        <div id="map"></div>
-        <div id="output">
-            <p>Use the draw tools (upper left) to draw a route. When finished, GeoJSON will appear below</p>
-            <textarea id="geojson-output"></textarea>
+    <div class="container">
+        <h1>Create and Explore Denver Bike Routes</h1>
+
+        <h2>Explore</h2>
+        <p>Use the filters below to find a bike route.</p>
+        <div class="row standard-height">
+            <div class="span8 full-height">
+                <div id="map" class="full-height"></div>
+            </div>
+            <div class="span4 full-height">
+                <div id="filters" class="full-height">
+                    
+                </div>
+            </div>
+        </div>
+
+        <h2>Create</h2>
+        <p>Use the draw tools on the map to draw a route. When finished, GeoJSON will appear to the right.</p>
+        <div class="row standard-height">
+            <div class="span8 full-height">
+                <div id="map2" class="full-height"></div>
+            </div>
+            <div class="span4 full-height">
+                <div id="output" class="full-height">
+                    <textarea id="geojson-output" class="full-width full-height"></textarea>
+                </div>
+            </div>
         </div>
     </div>
     
@@ -50,10 +66,10 @@
     
         var mapquest_url = 'http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png',
             mapquest = new L.TileLayer(mapquest_url, {maxZoom: 18, subdomains: '1234'}),
-            map = new L.Map('map', {layers: [mapquest], center: new L.LatLng(-37.7772, 175.2756), zoom: 15 });
+            map2 = new L.Map('map2', {layers: [mapquest], center: new L.LatLng(-37.7772, 175.2756), zoom: 15 });
 
         var drawnItems = new L.FeatureGroup();
-        map.addLayer(drawnItems);
+        map2.addLayer(drawnItems);
 
         var drawControl = new L.Control.Draw({
             draw: {
@@ -75,14 +91,14 @@
                 featureGroup: drawnItems
             }
         });
-        map.addControl(drawControl);
+        map2.addControl(drawControl);
 
-        map.on('draw:drawstart', function (e) {
+        map2.on('draw:drawstart', function (e) {
             drawnItems.clearLayers();
             document.getElementById('geojson-output').value = '';
         });
 
-        map.on('draw:created', function (e) {
+        map2.on('draw:created', function (e) {
             drawnItems.addLayer(e.layer);
             document.getElementById('geojson-output').value = JSON.stringify(drawnItems.toGeoJSON().features[0].geometry);
         });
