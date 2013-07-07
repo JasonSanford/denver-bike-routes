@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create GeoJSON</title>
+
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.2/leaflet.css" />
+    <link rel="stylesheet" href="lib/leaflet-draw/leaflet.draw.css" />
+    
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="lib/leaflet/leaflet.ie.css" />
+        <link rel="stylesheet" href="leaflet.draw.ie.css" />
+    <![endif]-->
+    
+    <script src="http://cdn.leafletjs.com/leaflet-0.6.2/leaflet.js"></script>
+    <script src="lib/leaflet-draw/leaflet.draw.js"></script>
+    <style type="text/css">
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        #wrapper {
+            height: 100%;
+            position: relative;
+        }
+        #map {
+            height: 100%;
+            width: 80%;
+            float: left;
+        }
+        #output {
+            width: 20%;
+            float: left;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="wrapper">
+        <div id="map"></div>
+        <div id="output">
+            <p>Use the draw tools (upper left) to draw a route. When finished, GeoJSON will appear below</p>
+            <textarea id="geojson-output"></textarea>
+        </div>
+    </div>
+    
+    <script>
+    
+        var mapquest_url = 'http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png',
+            mapquest = new L.TileLayer(mapquest_url, {maxZoom: 18, subdomains: '1234'}),
+            map = new L.Map('map', {layers: [mapquest], center: new L.LatLng(-37.7772, 175.2756), zoom: 15 });
+
+        var drawnItems = new L.FeatureGroup();
+        map.addLayer(drawnItems);
+
+        var drawControl = new L.Control.Draw({
+            draw: {
+                position: 'topleft',
+                polyline: {
+                    title: 'Draw a route',
+                    shapeOptions: {
+                        color: '#46461f',
+                        opacity: 0.8,
+                        weight: 7
+                    }
+                },
+                polygon: false,
+                circle: false,
+                rectangle: false,
+                marker: false
+            },
+            edit: {
+                featureGroup: drawnItems
+            }
+        });
+        map.addControl(drawControl);
+
+        map.on('draw:drawstart', function (e) {
+            drawnItems.clearLayers();
+            document.getElementById('geojson-output').value = '';
+        });
+
+        map.on('draw:created', function (e) {
+            drawnItems.addLayer(e.layer);
+            document.getElementById('geojson-output').value = JSON.stringify(drawnItems.toGeoJSON().features[0].geometry);
+        });
+
+        
+    </script>
+</body>
+</html>

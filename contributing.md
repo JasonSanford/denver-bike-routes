@@ -1,7 +1,6 @@
 ## Overview
 
-Bike routes should represent a specific, interesting path that you would send a friend on, not just a general bike path in the area.
-
+* Routes should represent a specific, interesting path that you would send a friend on, not just a general bike path in the area.
 * Routes should start and end in semi-public places like shopping centers or coffee shops, not your house.
 * Routes should adhere to a JSON schema like the one below. Some properties are required, some not.
 * Some routes can be very complex, so keep the geometry (LineString) on one line to keep `routes.geojson` somewhat readable. See Route Simplification below.
