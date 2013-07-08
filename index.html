@@ -184,7 +184,9 @@
         $('.slider-val').on('change', timeToFilter);
 
         function timeToFilter() {
+            displayedRoutes.clearLayers();
             var filtered = $.extend(true, {}, originalGeoJSON);
+            displayedRoutes.addData(filtered);
         }
         
     </script>
