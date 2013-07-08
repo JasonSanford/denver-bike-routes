@@ -110,7 +110,7 @@
         var drawnItems = new L.FeatureGroup();
         map2.addLayer(drawnItems);
 
-        $.getJSON('http://raw.github.com/JasonSanford/denver-bike-routes/master/routes.geojson', function (data){
+        $.getJSON('routes.geojson', function (data){
             originalGeoJSON = data;
         });
 
