@@ -123,12 +123,6 @@ function timeToFilter() {
         for (feature in filtered.features) {
             if (!('distance' in filtered.features[feature].properties) || (filtered.features[feature].properties.distance >= low && filtered.features[feature].properties.distance <= high)) {
                 newFiltered.features.push(filtered.features[feature]);
-                var geometry = filtered.features[feature].geometry,
-                    first = geometry.coordinates[0],
-                    last = geometry.coordinates[coordinates.length - 1],
-                    startMarker = new L.Marker([first[1], first[0]], {icon: startIcon}),
-                    endMarker = new L.Marker(last[1], last[0], {icon: endIcon});
-                startEndMarkers.addLayer(startMarker).addLayer(endMarker);
             }
         }
         filtered = newFiltered;
@@ -141,15 +135,17 @@ function timeToFilter() {
         for (feature in filtered.features) {
             if (!('difficulty' in filtered.features[feature].properties) || (filtered.features[feature].properties.difficulty >= low && filtered.features[feature].properties.difficulty <= high)) {
                 newFiltered.features.push(filtered.features[feature]);
-                var geometry = filtered.features[feature].geometry,
-                    first = geometry.coordinates[0],
-                    last = geometry.coordinates[coordinates.length - 1],
-                    startMarker = new L.Marker([first[1], first[0]], {icon: startIcon}),
-                    endMarker = new L.Marker(last[1], last[0], {icon: endIcon});
-                startEndMarkers.addLayer(startMarker).addLayer(endMarker);
             }
         }
         filtered = newFiltered;
+    }
+    for (feature in filtered.features) {
+        var geometry = filtered.features[feature].geometry,
+            first = geometry.coordinates[0],
+            last = geometry.coordinates[coordinates.length - 1],
+            startMarker = new L.Marker([first[1], first[0]], {icon: startIcon}),
+            endMarker = new L.Marker(last[1], last[0], {icon: endIcon});
+        startEndMarkers.addLayer(startMarker).addLayer(endMarker);
     }
 
     displayedRoutes.addData(filtered);
