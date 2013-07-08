@@ -13,8 +13,6 @@ endIcon = new L.Icon({
     iconUrl: 'img/markers/end.png',
     iconAnchor: [28, 28]
 });
-startMarker.addTo(map1);
-endMarker.addTo(map1);
 
 var displayedRoutes = new L.GeoJSON(null, {
     style: {
