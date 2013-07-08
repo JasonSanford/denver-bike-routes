@@ -6,7 +6,7 @@
 
 ![routes](https://raw.github.com/JasonSanford/denver-bike-routes/master/img/routes-example.png)
 
-### The Map
+## The Map
 
 * View at GitHub [routes.geojson](routes.geojson)
 * Advanced view with filters for distance and difficulty http://denver-bike-routes.geojason.info/
