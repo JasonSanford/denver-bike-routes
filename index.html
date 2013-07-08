@@ -10,14 +10,16 @@
     <link rel="stylesheet" href="lib/leaflet-draw/leaflet.draw.css">
     <link href="lib/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="lib/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="lib/nouislider/nouislider.fox.css" rel="stylesheet">
     
     <!--[if lte IE 8]>
         <link rel="stylesheet" href="lib/leaflet/leaflet.ie.css" />
         <link rel="stylesheet" href="leaflet.draw.ie.css" />
     <![endif]-->
-    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="http://cdn.leafletjs.com/leaflet-0.6.2/leaflet.js"></script>
     <script src="lib/leaflet-draw/leaflet.draw.js"></script>
+    <script src="lib/nouislider/jquery.nouislider.min.js"></script>
     <style type="text/css">
         .standard-height {
             height: 500px;
@@ -27,6 +29,22 @@
         }
         .full-width {
             width: 100%;
+        }
+        .filter {
+            margin-bottom: 30px;
+        }
+        .filter label {
+            display: inline;
+        }
+        .filter .check {
+            vertical-align: top;
+        }
+        .slider {
+            width: 100% !important;
+            margin-bottom: 10px;
+        }
+        .slider-val.right {
+            float: right;
         }
     </style>
 </head>
@@ -39,11 +57,26 @@
         <p>Use the filters below to find a bike route.</p>
         <div class="row standard-height">
             <div class="span8 full-height">
-                <div id="map" class="full-height"></div>
+                <div id="map1" class="full-height"></div>
             </div>
             <div class="span4 full-height">
                 <div id="filters" class="full-height">
-                    
+                    <div class="filter">
+                        <div style="margin-bottom: 10px;">
+                            <input type="checkbox" id="distance-check" class="check" data-toggling="distance"> <label for="distance-check">Filter by distance:</label>
+                        </div>
+                        <div class="slider distance noUiSlider" id="distance-slider"></div>
+                        <input type="text" class="distance input-small slider-val" id="distance-from" disabled>
+                        <input type="text" class="distance input-small slider-val right" id="distance-to" disabled>
+                    </div>
+                    <div class="filter">
+                        <div style="margin-bottom: 10px;">
+                            <input type="checkbox" id="difficulty-check" class="check" data-toggling="difficulty"> <label for="difficulty-check">Filter by difficulty:</label>
+                        </div>
+                        <div class="slider difficulty noUiSlider" id="difficulty-slider"></div>
+                        <input type="text" class="difficulty input-small slider-val" id="difficulty-from" disabled>
+                        <input type="text" class="difficulty input-small slider-val right" id="difficulty-to" disabled>
+                    </div>
                 </div>
             </div>
         </div>
@@ -65,11 +98,21 @@
     <script>
     
         var mapquest_url = 'http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png',
-            mapquest = new L.TileLayer(mapquest_url, {maxZoom: 18, subdomains: '1234'}),
-            map2 = new L.Map('map2', {layers: [mapquest], center: new L.LatLng(39.776880380637024, -104.98947143554686), zoom: 10 });
+            mapquest1 = new L.TileLayer(mapquest_url, {maxZoom: 18, subdomains: '1234'}),
+            mapquest2 = new L.TileLayer(mapquest_url, {maxZoom: 18, subdomains: '1234'}),
+            map1 = new L.Map('map1', {layers: [mapquest1], center: new L.LatLng(39.776880380637024, -104.98947143554686), zoom: 9}),
+            map2 = new L.Map('map2', {layers: [mapquest2], center: new L.LatLng(39.776880380637024, -104.98947143554686), zoom: 10}),
+            originalGeoJSON = null;
+
+        var displayedRoutes = new L.GeoJSON();
+        map1.addLayer(displayedRoutes);
 
         var drawnItems = new L.FeatureGroup();
         map2.addLayer(drawnItems);
+
+        $.getJSON('http://raw.github.com/JasonSanford/denver-bike-routes/master/routes.geojson', function (data){
+            originalGeoJSON = data;
+        });
 
         var drawControl = new L.Control.Draw({
             draw: {
@@ -103,6 +146,46 @@
             document.getElementById('geojson-output').value = JSON.stringify(drawnItems.toGeoJSON().features[0].geometry);
         });
 
+        $('#distance-slider').noUiSlider({
+            range: [0, 100],
+            start: [5, 50],
+            handles: 2,
+            step: 1,
+            serialization: {
+                to: [$('#distance-from'), $('#distance-to')]
+            },
+            slide: timeToFilter
+        }).noUiSlider('disabled', true);
+
+        $('#difficulty-slider').noUiSlider({
+            range: [0, 10],
+            start: [0, 10],
+            handles: 2,
+            step: 1,
+            serialization: {
+                to: [$('#difficulty-from'), $('#difficulty-to')]
+            },
+            slide: timeToFilter
+        }).noUiSlider('disabled', true);
+
+        $('.check').on('click', function () {
+            var $this = $(this),
+                checked = $this.is(':checked') ? true : false,
+                toggling = $this.data('toggling');
+            if (checked) {
+                $('.slider-val.' + toggling).removeAttr('disabled');
+            } else {
+                $('.slider-val.' + toggling).attr('disabled', 'shonuff');
+            }
+            $('#' + toggling + '-slider').noUiSlider('disabled', !checked);
+            timeToFilter();
+        });
+
+        $('.slider-val').on('change', timeToFilter);
+
+        function timeToFilter() {
+            var filtered = $.extend(true, {}, originalGeoJSON);
+        }
         
     </script>
 </body>
