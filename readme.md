@@ -4,6 +4,8 @@
 
 ### A collaborative list of Denver bike routes
 
+![routes](https://raw.github.com/JasonSanford/denver-bike-routes/master/routes-example.png)
+
 ### The Map
 
 * View at GitHub [routes.geojson](routes.geojson)
