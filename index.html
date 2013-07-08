@@ -111,9 +111,9 @@
                 width: 3
             },
             onEachFeature: function (feature, layer) {
-                popupContent = '<table><tbody>';
+                popupContent = '<table class="table table-striped"><tbody>';
                 for (property in feature.properties) {
-                    popupContent += '<tr><td>' + property + '</td><td>' + feature.properties[property] + '</td></tr>';
+                    popupContent += '<tr><td><strong>' + property + '</strong></td><td>' + feature.properties[property] + '</td></tr>';
                 }
                 popupContent += '</tbody></table>';
                 layer.bindPopup(popupContent);
@@ -201,6 +201,21 @@
         function timeToFilter() {
             displayedRoutes.clearLayers();
             var filtered = $.extend(true, {}, originalGeoJSON);
+            if ($('#distance-check').is(':checked')) {
+                var low = parseFloat($('#distance-from').val()),
+                    high = parseFloat($('#distance-to').val());
+                newFiltered = {type: 'FeatureCollection', features: []}
+                for (feature in filtered.features) {
+                    if (!('distance' in filtered.features[feature].properties)) {
+                        newFiltered.features.push(filtered.feature[feature]);
+                    } else {
+                        if (filtered.feature[feature].properties.distance >= low && filtered.feature[feature].properties.distance <= high) {
+                            newFiltered.features.push(filtered.feature[feature]);
+                        }
+                    }
+                }
+                filtered = newFiltered;
+            }
             displayedRoutes.addData(filtered);
         }
         
