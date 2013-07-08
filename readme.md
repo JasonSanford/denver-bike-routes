@@ -4,7 +4,7 @@
 
 ### A collaborative list of Denver bike routes
 
-![routes](https://raw.github.com/JasonSanford/denver-bike-routes/master/routes-example.png)
+![routes](https://raw.github.com/JasonSanford/denver-bike-routes/master/img/routes-example.png)
 
 ### The Map
 
