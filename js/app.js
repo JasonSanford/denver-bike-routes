@@ -142,7 +142,7 @@ function timeToFilter() {
     for (feature in filtered.features) {
         var geometry = filtered.features[feature].geometry,
             first = geometry.coordinates[0],
-            last = geometry.coordinates[coordinates.length - 1],
+            last = geometry.coordinates[geometry.coordinates.length - 1],
             startMarker = new L.Marker([first[1], first[0]], {icon: startIcon}),
             endMarker = new L.Marker(last[1], last[0], {icon: endIcon});
         startEndMarkers.addLayer(startMarker).addLayer(endMarker);
