@@ -201,6 +201,7 @@
         function timeToFilter() {
             displayedRoutes.clearLayers();
             var filtered = $.extend(true, {}, originalGeoJSON);
+
             if ($('#distance-check').is(':checked')) {
                 var low = parseFloat($('#distance-from').val()),
                     high = parseFloat($('#distance-to').val());
@@ -216,6 +217,23 @@
                 }
                 filtered = newFiltered;
             }
+
+            if ($('#difficulty-check').is(':checked')) {
+                var low = parseFloat($('#difficulty-from').val()),
+                    high = parseFloat($('#difficulty-to').val());
+                newFiltered = {type: 'FeatureCollection', features: []}
+                for (feature in filtered.features) {
+                    if (!('difficulty' in filtered.features[feature].properties)) {
+                        newFiltered.features.push(filtered.features[feature]);
+                    } else {
+                        if (filtered.features[feature].properties.difficulty >= low && filtered.features[feature].properties.difficulty <= high) {
+                            newFiltered.features.push(filtered.features[feature]);
+                        }
+                    }
+                }
+                filtered = newFiltered;
+            }
+
             displayedRoutes.addData(filtered);
         }
         
