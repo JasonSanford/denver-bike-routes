@@ -16,9 +16,9 @@ endIcon = new L.Icon({
 
 var displayedRoutes = new L.GeoJSON(null, {
     style: {
-        color: '#ff0000',
-        opacity: 0.8,
-        width: 3
+        color: '#003300',
+        opacity: 0.6,
+        width: 2
     },
     onEachFeature: function (feature, layer) {
         var popupContent = '<table class="table table-striped"><tbody>';
