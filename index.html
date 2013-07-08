@@ -207,10 +207,10 @@
                 newFiltered = {type: 'FeatureCollection', features: []}
                 for (feature in filtered.features) {
                     if (!('distance' in filtered.features[feature].properties)) {
-                        newFiltered.features.push(filtered.feature[feature]);
+                        newFiltered.features.push(filtered.features[feature]);
                     } else {
-                        if (filtered.feature[feature].properties.distance >= low && filtered.feature[feature].properties.distance <= high) {
-                            newFiltered.features.push(filtered.feature[feature]);
+                        if (filtered.features[feature].properties.distance >= low && filtered.features[feature].properties.distance <= high) {
+                            newFiltered.features.push(filtered.features[feature]);
                         }
                     }
                 }
