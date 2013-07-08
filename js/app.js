@@ -5,6 +5,17 @@ var mapquest_url = 'http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png',
     map2 = new L.Map('map2', {layers: [mapquest2], center: new L.LatLng(39.776880380637024, -104.98947143554686), zoom: 10}),
     originalGeoJSON = null;
 
+var startIcon = new L.Icon({
+    iconUrl: 'img/markers/start.png',
+    iconAnchor: [0, 28]
+}),
+endIcon = new L.Icon({
+    iconUrl: 'img/markers/end.png',
+    iconAnchor: [28, 28]
+});
+startMarker.addTo(map1);
+endMarker.addTo(map1);
+
 var displayedRoutes = new L.GeoJSON(null, {
     style: {
         color: '#ff0000',
@@ -100,20 +111,18 @@ $('.check').on('click', function () {
 $('.slider-val').on('change', timeToFilter);
 
 function timeToFilter() {
+    //startMarker = new L.Marker([39.73912186294833, -104.98470783233643], {icon: startIcon}),
+    //endMarker = new L.Marker([39.73912186294833, -104.98470783233643], {icon: endIcon})
     displayedRoutes.clearLayers();
     var filtered = $.extend(true, {}, originalGeoJSON);
 
     if ($('#distance-check').is(':checked')) {
         var low = parseFloat($('#distance-from').val()),
             high = parseFloat($('#distance-to').val());
-        newFiltered = {type: 'FeatureCollection', features: []}
+        newFiltered = {type: 'FeatureCollection', features: []};
         for (feature in filtered.features) {
-            if (!('distance' in filtered.features[feature].properties)) {
+            if (!('distance' in filtered.features[feature].properties) || (filtered.features[feature].properties.distance >= low && filtered.features[feature].properties.distance <= high)) {
                 newFiltered.features.push(filtered.features[feature]);
-            } else {
-                if (filtered.features[feature].properties.distance >= low && filtered.features[feature].properties.distance <= high) {
-                    newFiltered.features.push(filtered.features[feature]);
-                }
             }
         }
         filtered = newFiltered;
