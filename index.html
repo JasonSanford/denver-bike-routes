@@ -104,7 +104,21 @@
             map2 = new L.Map('map2', {layers: [mapquest2], center: new L.LatLng(39.776880380637024, -104.98947143554686), zoom: 10}),
             originalGeoJSON = null;
 
-        var displayedRoutes = new L.GeoJSON();
+        var displayedRoutes = new L.GeoJSON(null, {
+            style: {
+                color: '#ff0000',
+                opacity: 0.8,
+                width: 3
+            },
+            onEachFeature: function (feature, layer) {
+                popupContent = '<table><tbody>';
+                for (property in feature.properties) {
+                    popupContent += '<tr><td>' + property + '</td><td>' + feature.properties[property] + '</td></tr>';
+                }
+                popupContent += '</tbody></table>';
+                layer.bindPopup(popupContent);
+            }
+        });
         map1.addLayer(displayedRoutes);
 
         var drawnItems = new L.FeatureGroup();
@@ -112,6 +126,7 @@
 
         $.getJSON('routes.geojson', function (data){
             originalGeoJSON = data;
+            timeToFilter();
         });
 
         var drawControl = new L.Control.Draw({
