@@ -21,7 +21,7 @@ var displayedRoutes = new L.GeoJSON(null, {
         width: 3
     },
     onEachFeature: function (feature, layer) {
-        popupContent = '<table class="table table-striped"><tbody>';
+        var popupContent = '<table class="table table-striped"><tbody>';
         for (property in feature.properties) {
             popupContent += '<tr><td><strong>' + property + '</strong></td><td>' + feature.properties[property] + '</td></tr>';
         }
@@ -30,6 +30,9 @@ var displayedRoutes = new L.GeoJSON(null, {
     }
 });
 map1.addLayer(displayedRoutes);
+
+var startEndMarkers = new L.LayerGroup();
+map1.addLayer(startEndMarkers);
 
 var drawnItems = new L.FeatureGroup();
 map2.addLayer(drawnItems);
@@ -109,9 +112,8 @@ $('.check').on('click', function () {
 $('.slider-val').on('change', timeToFilter);
 
 function timeToFilter() {
-    //startMarker = new L.Marker([39.73912186294833, -104.98470783233643], {icon: startIcon}),
-    //endMarker = new L.Marker([39.73912186294833, -104.98470783233643], {icon: endIcon})
     displayedRoutes.clearLayers();
+    startEndMarkers.clearLayers();
     var filtered = $.extend(true, {}, originalGeoJSON);
 
     if ($('#distance-check').is(':checked')) {
@@ -121,6 +123,12 @@ function timeToFilter() {
         for (feature in filtered.features) {
             if (!('distance' in filtered.features[feature].properties) || (filtered.features[feature].properties.distance >= low && filtered.features[feature].properties.distance <= high)) {
                 newFiltered.features.push(filtered.features[feature]);
+                var geometry = filtered.features[feature].geometry,
+                    first = geometry.coordinates[0],
+                    last = geometry.coordinates[coordinates.length - 1],
+                    startMarker = new L.Marker([first[1], first[0]], {icon: startIcon}),
+                    endMarker = new L.Marker(last[1], last[0], {icon: endIcon});
+                startEndMarkers.addLayer(startMarker).addLayer(endMarker);
             }
         }
         filtered = newFiltered;
@@ -129,14 +137,16 @@ function timeToFilter() {
     if ($('#difficulty-check').is(':checked')) {
         var low = parseFloat($('#difficulty-from').val()),
             high = parseFloat($('#difficulty-to').val());
-        newFiltered = {type: 'FeatureCollection', features: []}
+        newFiltered = {type: 'FeatureCollection', features: []};
         for (feature in filtered.features) {
-            if (!('difficulty' in filtered.features[feature].properties)) {
+            if (!('difficulty' in filtered.features[feature].properties) || (filtered.features[feature].properties.difficulty >= low && filtered.features[feature].properties.difficulty <= high)) {
                 newFiltered.features.push(filtered.features[feature]);
-            } else {
-                if (filtered.features[feature].properties.difficulty >= low && filtered.features[feature].properties.difficulty <= high) {
-                    newFiltered.features.push(filtered.features[feature]);
-                }
+                var geometry = filtered.features[feature].geometry,
+                    first = geometry.coordinates[0],
+                    last = geometry.coordinates[coordinates.length - 1],
+                    startMarker = new L.Marker([first[1], first[0]], {icon: startIcon}),
+                    endMarker = new L.Marker(last[1], last[0], {icon: endIcon});
+                startEndMarkers.addLayer(startMarker).addLayer(endMarker);
             }
         }
         filtered = newFiltered;
