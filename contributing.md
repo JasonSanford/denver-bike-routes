@@ -5,7 +5,7 @@
 * Routes should adhere to a JSON schema like the one below. Some properties are required, some not.
 * Some routes can be very complex, so:
     * Keep the geometry (LineString) on one line to keep `routes.geojson` somewhat readable
-    * See [Route Simplification](#route-creation) below to minimize file size
+    * See [Route Simplification](#route-simplification) below to minimize file size
 
 ## Example Route (route schema)
 
