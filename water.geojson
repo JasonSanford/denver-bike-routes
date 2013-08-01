@@ -1,0 +1,10 @@
+{
+    "type": "Feature",
+    "properties": {
+        "name": "Writer's Vista Park"
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [-100, 40]
+    }
+}
